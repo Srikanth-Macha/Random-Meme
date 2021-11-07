@@ -57,7 +57,6 @@ public class Second_Activity extends AppCompatActivity {
     }
 
     void loadMeme(){
-
         String url = "https://meme-api.herokuapp.com/gimme";
 
         ProgressBar progressBar = findViewById(R.id.progressbarID);

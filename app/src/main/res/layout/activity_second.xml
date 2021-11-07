@@ -38,7 +38,8 @@
         app:layout_constraintRight_toLeftOf="@id/guideline2"
         app:layout_constraintTop_toBottomOf="@id/imageViewID"
         tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="622dp" />
+        tools:layout_editor_absoluteY="622dp"
+        android:backgroundTint="@color/Sharebutton"/>
 
     <Button
         android:id="@+id/NextbuttonID"
@@ -47,10 +48,11 @@
         android:layout_marginHorizontal="5dp"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/guideline2"
+        app:layout_constraintLeft_toRightOf="@id/guideline2"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageViewID"
-        tools:layout_editor_absoluteX="256dp" />
+        tools:layout_editor_absoluteX="256dp"
+        android:backgroundTint="@color/Nextbutton"/>
 
     <ProgressBar
         android:id="@+id/progressbarID"
