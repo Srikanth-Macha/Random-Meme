@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -26,7 +28,6 @@ import com.bumptech.glide.request.target.Target;
 import org.json.JSONException;
 
 public class Second_Activity extends AppCompatActivity {
-
     private String urlName;
 
     @Override
@@ -34,12 +35,39 @@ public class Second_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        loadMeme();
+        final String API_URL = getString(R.string.API_URL);
+
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)
+                actionBar.hide();
+
+        ProgressBar progressBar = findViewById(R.id.progressbarID);
+
+        SearchView searchView = findViewById(R.id.search_bar);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadMeme((API_URL + query).trim(), progressBar);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        // Call to initiate network call
+        loadMeme("", progressBar);
 
         Button Next = findViewById(R.id.NextbuttonID);
         Button share = findViewById(R.id.SharebuttonID);
 
-        Next.setOnClickListener(v -> loadMeme());
+        Next.setOnClickListener(v -> {
+            String url = searchView.getQuery().toString();
+
+            loadMeme((API_URL + url).trim(), progressBar);
+        });
 
         share.setOnClickListener(v -> {
 
@@ -52,13 +80,18 @@ public class Second_Activity extends AppCompatActivity {
 
     }
 
-    void loadMeme() {
-        String url = "https://meme-api.com/gimme";
-
-        ProgressBar progressBar = findViewById(R.id.progressbarID);
+    void loadMeme(String url, ProgressBar progressBar) {
+        if(url.isEmpty())
+            url = getString(R.string.API_URL);
 
         progressBar.setVisibility(View.VISIBLE);
 
+        // Network Call function
+        requestMemeFromAPI(url, progressBar);
+    }
+
+
+    void requestMemeFromAPI(String url, ProgressBar progressBar) {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 url,
                 null,
@@ -91,7 +124,7 @@ public class Second_Activity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 },
-                error -> Toast.makeText(Second_Activity.this, "Error Occurred", Toast.LENGTH_LONG).show());
+                error -> Toast.makeText(Second_Activity.this, "No matches found for the given category", Toast.LENGTH_LONG).show());
 
         MySingleton.getInstance(Second_Activity.this).addToRequestQueue(jsonObjectRequest);
     }

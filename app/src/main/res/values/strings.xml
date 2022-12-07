@@ -2,4 +2,6 @@
     <string name="app_name">Random Memes</string>
     <string name="share">Share</string>
     <string name="next">Next</string>
+
+    <string name="API_URL">https://meme-api.com/gimme/</string>
 </resources>
