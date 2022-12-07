@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication" >
+    package="com.example.RandomMemes" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,10 +13,10 @@
         android:theme="@style/Theme.MyApplication"
         android:fullBackupOnly="true">
         <activity
-            android:name=".Second_Activity"
+            android:name="com.example.RandomMemes.Second_Activity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.RandomMemes.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>

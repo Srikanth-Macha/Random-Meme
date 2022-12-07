@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.RandomMemes;
 
 import android.content.Context;
 
